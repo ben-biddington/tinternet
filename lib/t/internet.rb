@@ -24,7 +24,7 @@ module T
 
   SslClientCertificate = Struct.new "SslClientCertificate", :cert, :key, :verify_ssl
 
-  require File.join File.dirname(__FILE__), "adapters", "rest_client_internet"
+  require File.join "adapters", "rest_client_internet"
   
   Internet = RestClientInternet
 end
