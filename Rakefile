@@ -14,8 +14,8 @@ require 'rake'
 require 'jeweler'
 
 Jeweler::Tasks.new do |gem|
-  gem.name = "t"
-  gem.homepage = "http://github.com/ben-biddington/t"
+  gem.name = "tinternet"
+  gem.homepage = "http://github.com/ben-biddington/tinternet"
   gem.license = "MIT"
   gem.summary = %Q{The internet}
   gem.description = %Q{The internet}
