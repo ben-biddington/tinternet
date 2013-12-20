@@ -25,3 +25,12 @@ Jeweler::Tasks.new do |gem|
 end
 
 Jeweler::RubygemsDotOrgTasks.new
+
+require 'rspec/core/rake_task'
+
+desc "Run all the tests"
+RSpec::Core::RakeTask.new(:test) do |t|
+  t.pattern = "spec/**/_spec.rb"
+end
+
+task :default => :test
