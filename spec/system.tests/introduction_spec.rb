@@ -3,8 +3,7 @@ require "t"
 require "rsettings"
 
 S = ::Settings.new do
-  let "LOUD" => :loud
-  default :loud, :to => "no"
+  let "LOUD" => :loud; default :loud, :to => "no"
 end
 
 describe "The basics" do
@@ -23,10 +22,7 @@ describe "The basics" do
     expect(reply.code).to eql 200
   end
   
-  it "returns not found for missing document" do
-    pending "It is hard to find something to return 404" do
-      reply = internet.execute T::Request.new :uri => "http://ben.rules.com"
-      expect(reply.code).to eql 404
-    end 
+  it "fails when host cannot be found" do
+    expect{internet.execute(T::Request.new :uri => "http://a.com/")}.to raise_error /No such host/
   end 
 end 
