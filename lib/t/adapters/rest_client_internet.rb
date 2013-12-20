@@ -36,7 +36,9 @@ class RestClientInternet
   
     reply = RestClient::Request.execute(opts_for(request))
 
-    T::Response.new(200, reply.headers, reply)
+    notify :replied, reply
+    
+    T::Response.new(reply.code, reply.headers, reply)
   end
   
   def opts_for(request)
