@@ -23,6 +23,6 @@ describe "The basics" do
   end
   
   it "fails when host cannot be found" do
-    expect{internet.execute(T::Request.new :uri => "http://a.com/")}.to raise_error /No such host/
+    expect{internet.execute(T::Request.new :uri => "http://a.com/")}.to raise_error SocketError
   end 
 end 
