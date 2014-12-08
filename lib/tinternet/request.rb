@@ -20,7 +20,13 @@ module T
     def auth_header_name; "Authorization"; end
   end
 
-  Response = Struct.new "Response", :code, :headers, :body
+  class Response
+    attr_reader :code, :headers, :body
+    
+    def initialize(code, headers, body)
+      @code, @headers, @body = code, headers, body
+    end
+  end
 
-  SslClientCertificate = Struct.new "SslClientCertificate", :cert, :key, :verify_ssl
+  T::SslClientCertificate = Struct.new "SslClientCertificate", :cert, :key, :verify_ssl
 end
