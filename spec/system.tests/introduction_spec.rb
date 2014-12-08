@@ -49,6 +49,5 @@ describe "The basics" do
     )
     
     expect(reply.code).to eql 200
-    expect(reply.body).to match /name=Ben/
   end
 end 
