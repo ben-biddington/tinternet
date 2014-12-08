@@ -25,4 +25,15 @@ describe "The basics" do
   it "fails when host cannot be found" do
     expect{internet.execute(T::Request.new :uri => "http://a.com/")}.to raise_error SocketError
   end 
+  
+  it "can <application/x-www-form-urlencoded> post" do
+    reply = internet.execute T::Request.new(
+      :uri => "http://www.hashemian.com/tools/form-post-tester.php", 
+      :verb => :post,
+      :body => T::XWwwFormUrlencoded.new("name" => "Ben")
+    )
+    
+    expect(reply.code).to eql 200
+    expect(reply.body).to match /name=Ben/
+  end
 end 
