@@ -46,7 +46,7 @@ class RestClientInternet
       :method  => request.verb, 
       :url     => request.uri.to_s, 
       :headers => request.headers, 
-      :payload => request.body.to_s, 
+      :payload => request.body ? request.body.to_hash : nil, 
       :timeout => request_timeout_in_seconds
     }.merge ssl_opts
   end

@@ -4,13 +4,7 @@ module T
       @fields = fields
     end
     
-    def to_s
-      [].tap do |result|
-        @fields.each_pair do |name, value|
-          result << "#{encode(name)}=#{encode(value)}"
-        end
-      end.join "&"
-    end
+    def to_hash; @fields; end
     
     private
     
