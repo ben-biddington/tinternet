@@ -1,10 +1,23 @@
+class RestClientObserver
+  require 'audible'; extend Audible
+  require 'restclient'
+  RestClient.log = self
+  
+  class << self
+    def <<(message)
+      notify :progress, message
+    end
+  end
+end
+
 class RestClientInternet
   require "rest_client"
-  require "audible"; include Audible
-
+  require "audible"; include Audible; extend Audible
+  
   def initialize(opts ={})
     @ssl_client_cert = opts[:ssl_client_cert]
     @proxy           = opts[:proxy]
+    RestClientObserver.on(:progress) {|e,args| notify :progress, args.first}
   end
 
   def execute(request); try_execute request; end
@@ -43,11 +56,12 @@ class RestClientInternet
   
   def opts_for(request)
     {
-      :method  => request.verb, 
-      :url     => request.uri.to_s, 
-      :headers => request.headers, 
-      :payload => request.body ? request.body.to_hash : nil, 
-      :timeout => request_timeout_in_seconds
+      :method     => request.verb, 
+      :url        => request.uri.to_s, 
+      :headers    => request.headers, 
+      :payload    => request.body ? request.body.to_hash : nil, 
+      :timeout    => request_timeout_in_seconds,
+      :multipart  => request.body && request.body.respond_to?(:files)
     }.merge ssl_opts
   end
 

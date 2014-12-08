@@ -13,6 +13,10 @@ describe "The basics" do
         it.on :requesting do |e,args|
           puts "Requesting <#{args.first.uri}>"
         end
+        
+        it.on :progress do |e,args|
+          puts "#{e} -- #{args}"
+        end
       end
     end
   end
@@ -31,6 +35,17 @@ describe "The basics" do
       :uri => "http://www.hashemian.com/tools/form-post-tester.php", 
       :verb => :post,
       :body => T::XWwwFormUrlencoded.new("name" => "Ben")
+    )
+    
+    expect(reply.code).to eql 200
+    expect(reply.body).to match /name=Ben/
+  end
+  
+  it "can <multipart> post" do
+    reply = internet.execute T::Request.new(
+      :uri => "http://www.hashemian.com/tools/form-post-tester.php", 
+      :verb => :post,
+      :body => T::MultipartFormData.new({"name" => "Ben"}, {"README" => File.new("README.md", 'rb')})
     )
     
     expect(reply.code).to eql 200
