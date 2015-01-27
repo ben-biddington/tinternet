@@ -9,8 +9,9 @@ Gem::Specification.new do |s|
   s.version = "0.4.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
+  s.require_paths = ["lib"]
   s.authors = ["Ben Biddington"]
-  s.date = "2014-12-08"
+  s.date = "2015-01-27"
   s.description = "The internet"
   s.email = "ben.biddington@xero.com"
   s.extra_rdoc_files = [
@@ -38,8 +39,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://github.com/ben-biddington/tinternet"
   s.licenses = ["MIT"]
-  s.require_paths = ["lib"]
-  s.rubygems_version = "2.1.11"
+  s.rubygems_version = "2.4.5"
   s.summary = "The internet"
 
   if s.respond_to? :specification_version then
